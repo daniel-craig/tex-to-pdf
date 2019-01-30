@@ -19,7 +19,7 @@ deploy:
   module_name: "tex-to-pdf"
   handler_name: "lambda_handler"
   on:
-    repo: daniel-craig/pdflatex-lambda
+    repo: daniel-craig/tex-to-pdf
 - provider: s3
   access_key_id: $access_key_id
   secret_access_key: $secret_key
@@ -28,4 +28,4 @@ deploy:
   region: us-east-1
   skip-cleanup: true
   on:
-    repo: daniel-craig/pdflatex-lambda
+    repo: daniel-craig/tex-to-pdf

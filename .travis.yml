@@ -2,7 +2,7 @@ language: generic
 install:
 - git clone https://github.com/samoconnor/lambdalatex
 - pip install -r src/requirements.txt -t lambda-env
-- cp -r src/tex-to-pdf.py lambda-env/
+- cp -r src/tex-to-pdf.py lambda-env
 - cp lambdalatex/lambdalatex.zip lambda-env
 - cd lambda-env/
 - zip -r ../lambda_env.zip *

@@ -1,0 +1,31 @@
+language: generic
+install:
+- git clone https://github.com/samoconnor/lambdalatex
+- pip install -r src/requirements.txt -t lambda-env
+- cp -r src/tex-to-pdf.py lambda-env/
+- cp lambdalatex/lambdalatex.zip lambda-env
+- cd lambda-env/
+- zip -r ../lambda_env.zip *
+- cd ..
+deploy:
+- provider: lambda
+  access_key_id: $access_key_id
+  secret_access_key: $secret_key
+  function_name: "tex-to-pdf"
+  zip: lambda_env.zip
+  region: "us-east-1"
+  role: "arn:aws:iam::523059797638:role/service-role/tex-to-pdf-role"
+  runtime: "python2.7"
+  module_name: "tex-to-pdf"
+  handler_name: "lambda_handler"
+  on:
+    repo: daniel-craig/pdflatex-lambda
+- provider: s3
+  access_key_id: $access_key_id
+  secret_access_key: $secret_key
+  bucket: tex-to-pdf
+  local-dir: page
+  region: us-east-1
+  skip-cleanup: true
+  on:
+    repo: daniel-craig/pdflatex-lambda

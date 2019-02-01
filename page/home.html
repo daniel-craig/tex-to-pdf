@@ -22,6 +22,27 @@
             apiVersion: '2006-03-01',
             params: {Bucket: albumBucketName}
             });
+
+            var files = document.getElementById('fileupload').files;
+            if (!files.length) {
+                return alert('Please choose a file to upload first.');
+            }
+            var file = files[0];
+            var fileName = file.name;
+//            var albumPhotosKey = encodeURIComponent(albumName) + '//';
+
+            var photoKey = albumPhotosKey + fileName;
+            s3.upload({
+                Key: fileName,
+                Body: file,
+                ACL: 'public-read'
+            }, function(err, data) {
+                if (err) {
+                return alert('There was an error uploading your file: ', err.message);
+                }
+                alert('Successfully uploaded file.');
+                //viewAlbum(albumName);
+            });
         }
 
     </script>
@@ -37,7 +58,7 @@
     </div>
     <div>
         <form onsubmit="upload()">
-            <input type="file"><br>
+            <input type="file" id="fileupload"><br>
             <input type="submit" value="Convert File">
         </form>
     </div>

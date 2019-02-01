@@ -15,12 +15,23 @@
             var bucketRegion = 'us-east-1';
             var IdentityPoolId = 'dm-tex-submitters';
 
-            // Initialize the Amazon Cognito credentials provider
-            AWS.config.region = 'us-east-1'; // Region
+            AWS.config.region = 'us-east-1';
             AWS.config.credentials = new AWS.CognitoIdentityCredentials({
-                IdentityPoolId: 'us-east-1:5f28b891-4325-4665-8fd2-b9930be86e81',
+                IdentityPoolId: 'us-east-1:5f28b891-4325-4665-8fd2-b9930be86e81'
             });
 
+            AWSCognito.config.region = 'us-east-1';
+            AWSCognito.config.credentials = new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'us-east-1:5f28b891-4325-4665-8fd2-b9930be86e81'
+            });
+
+            // Initialize the Amazon Cognito credentials provider
+            /*AWS.config.region = 'us-east-1'; // Region
+            AWS.config.credentials = new AWS.CognitoIdentityCredentials({
+                IdentityPoolId: 'us-east-1:5f28b891-4325-4665-8fd2-b9930be86e81',
+            });*/
+
+            AWSCognito.config.update({accessKeyId: 'anything', secretAccessKey: 'anything'});
 
             AWS.config.credentials.refresh(function(){
 

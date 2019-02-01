@@ -38,8 +38,8 @@
                 ACL: 'public-read'
             }, function(err, data) {
                 if (err) {
-                return alert('There was an error uploading your file: ', err.message);
                 console.log(err.message);
+                return alert('There was an error uploading your file: ', err.message);
                 }
                 alert('Successfully uploaded file.');
                 //viewAlbum(albumName);

@@ -11,7 +11,7 @@
 
     <script>
         function upload() {
-            var albumBucketName = 'tex-to-pdf';
+            var albumBucketName = 'dm-latex';
             var bucketRegion = 'us-east-1';
             var IdentityPoolId = 'dm-tex-submitters';
 
@@ -46,6 +46,7 @@
                     console.log(err.message);
                     return alert('There was an error uploading your file: ', err.message);
                     }
+                    console.log('Successfully uploaded file.');
                     alert('Successfully uploaded file.');
     //                viewAlbum(albumName);
                 });

@@ -21,32 +21,35 @@
                 IdentityPoolId: 'us-east-1:5f28b891-4325-4665-8fd2-b9930be86e81',
             });
 
-            var s3 = new AWS.S3({
-            apiVersion: '2006-03-01',
-            params: {Bucket: albumBucketName}
-            });
-            var files = document.getElementById('fileupload').files;
-            if (!files.length) {
-                return alert('Please choose a file to upload first.');
-            }
-            var file = files[0];
-            var fileName = file.name;
-//            var albumPhotosKey = encodeURIComponent(albumName) + '//';
 
-//            var photoKey = albumPhotosKey + fileName;
-            s3.upload({
-                Key: fileName,
-                Body: file,
-                ACL: 'public-read'
-            }, function(err, data) {
-                if (err) {
-                console.log(err.message);
-                return alert('There was an error uploading your file: ', err.message);
+            AWS.config.credentials.refresh(function(){
+
+                var s3 = new AWS.S3({
+                apiVersion: '2006-03-01',
+                params: {Bucket: albumBucketName}
+                });
+                var files = document.getElementById('fileupload').files;
+                if (!files.length) {
+                    return alert('Please choose a file to upload first.');
                 }
-                alert('Successfully uploaded file.');
-//                viewAlbum(albumName);
+                var file = files[0];
+                var fileName = file.name;
+    //            var albumPhotosKey = encodeURIComponent(albumName) + '//';
+
+    //            var photoKey = albumPhotosKey + fileName;
+                s3.upload({
+                    Key: fileName,
+                    Body: file,
+                    ACL: 'public-read'
+                }, function(err, data) {
+                    if (err) {
+                    console.log(err.message);
+                    return alert('There was an error uploading your file: ', err.message);
+                    }
+                    alert('Successfully uploaded file.');
+    //                viewAlbum(albumName);
+                });
             });
-        
         }
 
     </script>

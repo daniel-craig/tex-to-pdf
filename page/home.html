@@ -11,10 +11,17 @@
 
     <script>
         function upload() {
-            var xhttp = new XMLHttpRequest();
-            xhttp.open("POST", "https://m83zthl0l0.execute-api.us-east-1.amazonaws.com/prod/tex-to-pdf", true);
-            xhttp.send();
-            console.log("Uploaded!");
+            var albumBucketName = 'tex-to-pdf';
+            var bucketRegion = 'us-east-1';
+
+            AWS.config.update({
+                region: bucketRegion
+            });
+
+            var s3 = new AWS.S3({
+            apiVersion: '2006-03-01',
+            params: {Bucket: albumBucketName}
+            });
         }
 
     </script>
